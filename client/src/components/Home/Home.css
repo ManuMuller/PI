@@ -1,0 +1,9 @@
+.home {
+  background-color: blanchedalmond;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2rem;
+}

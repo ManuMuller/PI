@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { API_KEY, API_KEY2 } = process.env;
+const { API_KEY, API_KEY2, API_KEY3 } = process.env;
 const axios = require('axios')
 const { Recipe, TypeDiet } = require('../db')
 const { Op } = require('sequelize')
@@ -7,7 +7,7 @@ const { Op } = require('sequelize')
 
 const getApiInfo = async () => {
     try {
-        const info = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&addRecipeInformation=true&number=100`)).data.results
+        const info = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY3}&addRecipeInformation=true&number=100`)).data.results
         const getApiInfo = await info.map(receta => {
             return {
                 id: receta.id,
@@ -90,7 +90,7 @@ const getRecipe = async (id) => {
     }
     id = parseInt(id)
     try {
-        const recetaAPI = await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY2}`)
+        const recetaAPI = await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY3}`)
         return {
             id: recetaAPI.data.id,
             name: recetaAPI.data.title,
@@ -107,29 +107,29 @@ const getRecipe = async (id) => {
 }
 
 
-const addDietas = async () => {
-    const TypesOfDiets = [
-        { nombre: 'vegetarian' },
-        { nombre: 'lacto vegetarian' },
-        { nombre: 'ovo vegetarian' },
-        { nombre: 'vegan' },
-        { nombre: 'pescetarian' },
-        { nombre: 'paleolithic' },
-        { nombre: 'dairy free' },
-        { nombre: 'primal' },
-        { nombre: 'whole30' },
-        { nombre: 'gluten free' },
-        { nombre: 'lacto ovo vegetarian' }
-    ]
+// const addDietas = async () => {
+//     const TypesOfDiets = [
+//         { nombre: 'vegetarian' },
+//         { nombre: 'lacto vegetarian' },
+//         { nombre: 'ovo vegetarian' },
+//         { nombre: 'vegan' },
+//         { nombre: 'pescetarian' },
+//         { nombre: 'paleolithic' },
+//         { nombre: 'dairy free' },
+//         { nombre: 'primal' },
+//         { nombre: 'whole30' },
+//         { nombre: 'gluten free' },
+//         { nombre: 'lacto ovo vegetarian' }
+//     ]
 
-    try {
-        const listaDietas = await TypeDiet.bulkCreate(TypesOfDiets, { returning: true });
-        console.log(listaDietas)
-        return listaDietas;
-    } catch (error) {
-        console.log(error)
-    }
-}
+//     try {
+//         const listaDietas = await TypeDiet.bulkCreate(TypesOfDiets, { returning: true });
+//         console.log(listaDietas)
+//         return listaDietas;
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
 const getDietas = async () => {
     try {
@@ -151,6 +151,6 @@ module.exports = {
     getAll,
     getRecipe,
     getDbInfo,
-    addDietas,
+    // addDietas,
     getDietas
 }

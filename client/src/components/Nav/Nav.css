@@ -1,0 +1,21 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aqua;
+}
+.nav h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 3em;
+  color: white;
+  margin: 0;
+}
+
+.nav-logo {
+  font-size: 2em;
+  color: white;
+  margin-top: 10px;
+  margin-left: 10px;
+}

@@ -2,13 +2,12 @@ body {
   height: 900px;
   background-image: url("../../imgs/LandingPage.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center center;
 }
 .landingBody {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(3, auto);
   gap: 0px 0px;
   grid-template-areas:
     ". . ."
