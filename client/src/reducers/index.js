@@ -8,7 +8,7 @@ import {
     FILTER_BY_DIET,
     ORDER_BY_NAME,
     ORDER_BY_SCORE,
-    SET_MODAL
+    FILTER_CREATED
 } from "../actions/index"
 
 const initialState = {
@@ -16,7 +16,6 @@ const initialState = {
     recipesToFilter: [],
     diets: [],
     details: [],
-    modal: false
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -52,44 +51,45 @@ export default function rootReducer(state = initialState, action) {
                 ...state
             }
         case FILTER_BY_DIET:
-            const allRecipes = state.recipes;
-            const stateFilter = action.payload === "all" ? state.recipesToFilter : allRecipes.filter(
-                recipe =>
-                    recipe.diets.includes(action.payload) ||
-                    recipe.diets.map(r => r.name).includes(action.payload)
-            )
+            if (action.payload === "All") state.recipes = state.recipesToFilter
+            else state.recipes = state.recipesToFilter.filter(recipe => recipe.diets === action.payload)
             return {
                 ...state,
-                recipe: stateFilter
+                recipes: state.recipes
             }
         case ORDER_BY_NAME:
-            const sortByName = action.payload === "asc"
-            state.recipes.sort(function (a, b) {
-                return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-            })
-            state.recipes.sort(function (a, b) {
-                return a.name > b.name ? -1 : b.name > a.name ? 1 : 0;
-            })
+            const sortByName = action.payload === "asc" ?
+                state.recipes.sort(function (a, b) {
+                    return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
+                }) :
+                state.recipes.sort(function (a, b) {
+                    return a.name > b.name ? -1 : b.name > a.name ? 1 : 0;
+                })
             return {
                 ...state,
                 recipes: sortByName
             }
         case ORDER_BY_SCORE:
-            const sortByScore = action.payload === "mayor"
-            state.recipes.sort(function (a, b) {
-                return a.score > b.score ? -1 : b.score > a.score ? 1 : 0;
-            })
-            state.recipes.sort(function (a, b) {
-                return a.score > b.score ? 1 : b.score > a.score ? -1 : 0;
+            const recypesByScore = action.payload === 'mayor' ? state.recipesToFilter.sort((a, b) => {
+
+                if ((a.healthScore - b.healthScore) < 0) return 1
+                else return -1
+            }) : state.recipesToFilter.sort((a, b) => {
+
+                if ((a.healthScore - b.healthScore) < 0) return 1
+                else return -1
             })
             return {
                 ...state,
-                recipes: sortByScore
+                recipes: recypesByScore
             }
-        case SET_MODAL:
+        case FILTER_CREATED:
+            if (action.payload === "api") state.recipes = state.recipes.filter(recipe => typeof recipe.id === "number")
+            if (action.payload === "created") state.recipes = state.recipes.filter(recipe => typeof recipe.id === "string")
+            if (action.payload === "All") state.recipes = state.recipesToFilter
             return {
                 ...state,
-                modal: action.payload
+                recipes: state.recipes
             }
 
         default:

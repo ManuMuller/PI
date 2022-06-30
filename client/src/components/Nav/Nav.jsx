@@ -13,7 +13,9 @@ const Nav = () => {
                 </Link>
             </div>
             <Link to='/home'><h1 className='nav-title'>Pi Food</h1></Link>
-            <SearchBar />
+            <div className='nav-search'>
+                <SearchBar />
+            </div>
         </div>
     )
 }

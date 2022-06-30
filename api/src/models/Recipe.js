@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       type: DataTypes.DOUBLE,
     },
     StepByStep: {
-      type: DataTypes.TEXT
+      type: DataTypes.ARRAY(DataTypes.STRING),
     },
     InDB: {
       type: DataTypes.BOOLEAN,

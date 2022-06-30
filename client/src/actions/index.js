@@ -9,7 +9,7 @@ export const POST_RECIPE = 'POST_RECIPE';
 export const FILTER_BY_DIET = 'FILTER_BY_DIET';
 export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_SCORE = 'ORDER_BY_SCORE';
-export const SET_MODAL = 'SET_MODAL';
+export const FILTER_CREATED = 'FILTER_CREATED';
 
 export function getRecipes() {
     return dispatch => {
@@ -73,8 +73,17 @@ export function postRecipe(recipe) {
 }
 
 export function filterByDiet(payload) {
+    console.log(payload)
     return {
         type: FILTER_BY_DIET,
+        payload
+    }
+}
+
+export function filterCreated(payload) {
+    console.log(payload)
+    return {
+        type: FILTER_CREATED,
         payload
     }
 }
@@ -89,13 +98,6 @@ export function orderByName(payload) {
 export function orderByScore(payload) {
     return {
         type: ORDER_BY_SCORE,
-        payload
-    }
-}
-
-export function addModal(payload) {
-    return {
-        type: SET_MODAL,
         payload
     }
 }

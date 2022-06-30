@@ -15,9 +15,6 @@ router.post('/', async (req, res, next) => {
         diets,
         createInDb
     } = req.body
-    if (!name || !description) {
-        return res.status(400).send('te faltaron nombre o descripcion pa');
-    }
     try {
         let createRecipe = await Recipe.create({
             name,
