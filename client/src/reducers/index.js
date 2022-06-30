@@ -15,7 +15,7 @@ const initialState = {
     recipes: [],
     recipesToFilter: [],
     diets: [],
-    details: [],
+    detail: [],
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -39,7 +39,7 @@ export default function rootReducer(state = initialState, action) {
         case GET_DETAILS:
             return {
                 ...state,
-                details: action.payload
+                detail: action.payload
             }
         case RESET_DETAILS:
             return {

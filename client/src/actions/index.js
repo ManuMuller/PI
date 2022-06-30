@@ -25,7 +25,7 @@ export function getRecipes() {
 
 export function getRecipesName(name) {
     return function (dispatch) {
-        axios.get(`http://localhost:3001/recipes/?name=${name}`)
+        axios.get(`http://localhost:3001/recipes?name=${name}`)
             .then(res => {
                 dispatch({
                     type: GET_RECIPES_NAME,
@@ -47,7 +47,7 @@ export function getDiets() {
     }
 }
 
-export function getDetails(id) {
+export function getDetail(id) {
     return function (dispatch) {
         axios.get(`http://localhost:3001/recipes/${id}`)
             .then(res => {
@@ -59,7 +59,7 @@ export function getDetails(id) {
     }
 }
 
-export function resetDetails() {
+export function resetDetail() {
     return {
         type: RESET_DETAILS
     }
@@ -67,7 +67,7 @@ export function resetDetails() {
 
 export function postRecipe(recipe) {
     return async function () {
-        let info = await axios.post("http://localhost:3001/recipes", recipe)
+        let info = await axios.post("http://localhost:3001/createrecipe", recipe)
         return info.data
     }
 }

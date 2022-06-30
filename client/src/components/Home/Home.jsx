@@ -68,7 +68,7 @@ export default function Home() {
     return (
         <div className="home">
             <Nav />
-            <Link to="/recipes">Crear Receta</Link>
+            <Link to="/createrecipe">Crear Receta</Link>
             <Paginado
                 recipesPerPage={recipesPerPage}
                 allRecipes={allRecipes.length}

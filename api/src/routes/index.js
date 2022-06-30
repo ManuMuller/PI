@@ -14,7 +14,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.use('/recipes', recipes)
-router.use('/recipes', recipe)
+router.use('/createrecipe', recipe)
 // router.use('/diets', diets)
 router.use('/diets', diets)
 // router.use('/diets', diets)
